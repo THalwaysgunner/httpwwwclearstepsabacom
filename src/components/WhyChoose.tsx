@@ -32,10 +32,10 @@ const WhyChoose = () => {
       <div className="container mx-auto container-padding">
         <div className="max-w-3xl mx-auto text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            <span className="gradient-text">Why Choose CLEARSTEPSS?</span>
+            <span className="gradient-text">Why Choose CLEARSTEPS?</span>
           </h2>
           <p className="text-lg text-muted-foreground">
-            At <span className="gradient-text font-semibold">CLEARSTEPSS</span>, our mission is to empower individuals and families through compassionate, evidence-based Applied Behavior Analysis services
+            At <span className="gradient-text font-semibold">CLEARSTEPS</span>, our mission is to empower individuals and families through compassionate, evidence-based Applied Behavior Analysis services
           </p>
         </div>
 
