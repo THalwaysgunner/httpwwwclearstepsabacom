@@ -13,7 +13,7 @@ const Hero = () => {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Content */}
           <div className="text-primary-foreground animate-fade-in">
-            <h1 className="text-5xl md:text-6xl lg:text-6xl font-bold mb-6 leading-tight">Empowering Lives</h1>
+            <h1 className="text-5xl md:text-5xl lg:text-5xl font-bold mb-6 leading-tight">Empowering Lives</h1>
             <h2 className="text-xl md:text-2xl font-medium mb-6 text-primary-foreground/90">
               Applied Behavior Analysis (ABA) Therapy
             </h2>
