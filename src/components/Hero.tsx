@@ -18,9 +18,9 @@ const Hero = () => {
               Applied Behavior Analysis (ABA) Therapy
             </h2>
             <p className="text-lg md:text-xl text-primary-foreground/80 mb-8 max-w-xl">
-              At <span className="font-semibold text-accent">CLEARSTEPSS</span>, we specialize in providing
-              comprehensive ABA therapy services designed to help individuals with Autism Spectrum Disorder (ASD) unlock
-              their full potential.
+              At <span className="font-semibold text-accent">CLEARSTEPS</span>, we specialize in providing comprehensive
+              ABA therapy services designed to help individuals with Autism Spectrum Disorder (ASD) unlock their full
+              potential.
             </p>
 
             {/* Info Cards Row */}

@@ -17,7 +17,8 @@ const Footer = () => {
           <div>
             <img src={logo} alt="CLEARSTEPSS Logo" className="h-10 w-auto mb-6 brightness-0 invert" />
             <p className="text-primary-foreground/70">
-              We specialize in providing comprehensive ABA therapy services designed to help individuals with Autism Spectrum Disorder (ASD) unlock their full potential.
+              We specialize in providing comprehensive ABA therapy services designed to help individuals with Autism
+              Spectrum Disorder (ASD) unlock their full potential.
             </p>
           </div>
 
@@ -51,13 +52,13 @@ const Footer = () => {
                 <span>+1 (718) 344-1446</span>
               </a>
               <a
-                href="mailto:office@clearstepss.com"
+                href="mailto:office@clearsteps.com"
                 className="flex items-center gap-3 text-primary-foreground/70 hover:text-accent transition-colors"
               >
                 <div className="w-10 h-10 bg-primary/20 rounded-full flex items-center justify-center">
                   <Mail className="w-4 h-4 text-accent" />
                 </div>
-                <span>office@clearstepss.com</span>
+                <span>office@clearsteps.com</span>
               </a>
             </nav>
           </div>

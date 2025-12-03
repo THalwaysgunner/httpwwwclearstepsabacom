@@ -11,14 +11,16 @@ const CTASection = () => {
 
       <div className="container mx-auto container-padding relative z-10">
         <div className="max-w-4xl mx-auto text-center text-primary-foreground">
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-            Get Started Today with CLEARSTEPSS
-          </h2>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">Get Started Today with CLEARSTEPS</h2>
           <p className="text-xl text-primary-foreground/80 mb-10 max-w-2xl mx-auto">
-            Contact us to schedule a consultation and learn more about how we can support your loved one on their path to success.
+            Contact us to schedule a consultation and learn more about how we can support your loved one on their path
+            to success.
           </p>
-          
-          <a href="#contact" className="inline-flex items-center gap-4 bg-primary-foreground/10 backdrop-blur-sm rounded-full p-3 pl-8 border border-primary-foreground/20 transition-all duration-300 hover:bg-primary-foreground/20 group">
+
+          <a
+            href="#contact"
+            className="inline-flex items-center gap-4 bg-primary-foreground/10 backdrop-blur-sm rounded-full p-3 pl-8 border border-primary-foreground/20 transition-all duration-300 hover:bg-primary-foreground/20 group"
+          >
             <div className="text-left">
               <p className="font-semibold text-lg">Get Started</p>
               <p className="text-sm text-primary-foreground/70">Discover how ABA therapy can make a difference</p>
