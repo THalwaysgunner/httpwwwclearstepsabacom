@@ -13,14 +13,14 @@ const Hero = () => {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Content */}
           <div className="text-primary-foreground animate-fade-in">
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
-              Empowering Lives
-            </h1>
+            <h1 className="text-5xl md:text-6xl lg:text-6xl font-bold mb-6 leading-tight">Empowering Lives</h1>
             <h2 className="text-xl md:text-2xl font-medium mb-6 text-primary-foreground/90">
               Applied Behavior Analysis (ABA) Therapy
             </h2>
             <p className="text-lg md:text-xl text-primary-foreground/80 mb-8 max-w-xl">
-              At <span className="font-semibold text-accent">CLEARSTEPSS</span>, we specialize in providing comprehensive ABA therapy services designed to help individuals with Autism Spectrum Disorder (ASD) unlock their full potential.
+              At <span className="font-semibold text-accent">CLEARSTEPSS</span>, we specialize in providing
+              comprehensive ABA therapy services designed to help individuals with Autism Spectrum Disorder (ASD) unlock
+              their full potential.
             </p>
 
             {/* Info Cards Row */}
@@ -64,7 +64,10 @@ const Hero = () => {
       {/* Wave Bottom */}
       <div className="absolute bottom-0 left-0 right-0">
         <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M0 120L60 110C120 100 240 80 360 70C480 60 600 60 720 65C840 70 960 80 1080 85C1200 90 1320 90 1380 90L1440 90V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z" fill="hsl(var(--background))" />
+          <path
+            d="M0 120L60 110C120 100 240 80 360 70C480 60 600 60 720 65C840 70 960 80 1080 85C1200 90 1320 90 1380 90L1440 90V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z"
+            fill="hsl(var(--background))"
+          />
         </svg>
       </div>
     </section>
