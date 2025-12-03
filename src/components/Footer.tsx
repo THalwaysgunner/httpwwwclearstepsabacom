@@ -1,5 +1,5 @@
 import { Phone, Mail } from "lucide-react";
-import logo from "@/assets/clearstepss-logo.png";
+import logo from "@/assets/clearsteps-logo.png";
 
 const Footer = () => {
   const quickLinks = [
@@ -15,7 +15,7 @@ const Footer = () => {
         <div className="grid md:grid-cols-3 gap-12">
           {/* Logo & Description */}
           <div>
-            <img src={logo} alt="CLEARSTEPSS Logo" className="h-10 w-auto mb-6 brightness-0 invert" />
+            <img src={logo} alt="CLEARSTEPS Logo" className="h-10 w-auto mb-6 brightness-0 invert" />
             <p className="text-primary-foreground/70">
               We specialize in providing comprehensive ABA therapy services designed to help individuals with Autism
               Spectrum Disorder (ASD) unlock their full potential.
@@ -66,7 +66,7 @@ const Footer = () => {
 
         {/* Bottom Bar */}
         <div className="border-t border-primary-foreground/10 mt-12 pt-8 text-center text-primary-foreground/50">
-          <p>© CLEARSTEPSS. All Rights Reserved. 2012 - 2025</p>
+          <p>© CLEARSTEPS. All Rights Reserved. 2012 - 2025</p>
         </div>
       </div>
     </footer>

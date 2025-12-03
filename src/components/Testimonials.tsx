@@ -6,22 +6,22 @@ const Testimonials = () => {
 
   const testimonials = [
     {
-      text: "Before finding CLEARSTEPSS, I felt hopeless watching my son struggle with daily tasks and communication. Today, I can't believe the progress he's made! The therapists are patient and caring—and my child actually looks forward to his sessions. I can finally see a bright future ahead.",
+      text: "Before finding CLEARSTEPS, I felt hopeless watching my son struggle with daily tasks and communication. Today, I can't believe the progress he's made! The therapists are patient and caring—and my child actually looks forward to his sessions. I can finally see a bright future ahead.",
       name: "Michael",
       info: "Parent of a 5-Year-Old, Queens, NY",
     },
     {
-      text: "Accepting that my son has autism was one of the toughest moments in my life. I felt overwhelmed and unsure of how to help him. But CLEARSTEPSS made the transition smoother. The team not only supported my 4-year-old but also guided me as a parent. They helped me better understand my child's needs and taught me how to approach him in a way that fosters his growth. Thanks to their care and expertise, we've seen amazing progress, and I feel more confident as a parent. I'm forever grateful for CLEARSTEPSS.",
+      text: "Accepting that my son has autism was one of the toughest moments in my life. I felt overwhelmed and unsure of how to help him. But CLEARSTEPS made the transition smoother. The team not only supported my 4-year-old but also guided me as a parent. They helped me better understand my child's needs and taught me how to approach him in a way that fosters his growth. Thanks to their care and expertise, we've seen amazing progress, and I feel more confident as a parent. I'm forever grateful for CLEARSTEPS.",
       name: "Rose",
       info: "Parent of a 8-Year-Old, Brooklyn, NY",
     },
     {
-      text: "When we first started therapy with CLEARSTEPSS, my daughter was having difficulty expressing herself and engaging with tasks. The BCBA took the time to really understand her needs and created a personalized approach that has helped her to improve. The progress she's made is remarkable, and I feel much more confident as a parent knowing I have the support of such a dedicated team.",
+      text: "When we first started therapy with CLEARSTEPS, my daughter was having difficulty expressing herself and engaging with tasks. The BCBA took the time to really understand her needs and created a personalized approach that has helped her to improve. The progress she's made is remarkable, and I feel much more confident as a parent knowing I have the support of such a dedicated team.",
       name: "Jennifer",
       info: "Parent of a 13-Year-Old, Staten Island, NY",
     },
     {
-      text: "As a parent of a nonverbal child with autism, finding CLEARSTEPSS was the best decision we ever made. Their evidence-based approach and compassionate staff have helped my daughter gain confidence and new skills. Highly recommend!",
+      text: "As a parent of a nonverbal child with autism, finding CLEARSTEPS was the best decision we ever made. Their evidence-based approach and compassionate staff have helped my daughter gain confidence and new skills. Highly recommend!",
       name: "Samantha",
       info: "Parent of a 8-Year-Old, Brooklyn, NY",
     },
