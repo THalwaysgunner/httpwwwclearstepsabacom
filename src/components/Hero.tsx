@@ -18,9 +18,8 @@ const Hero = () => {
               Applied Behavior Analysis (ABA) Therapy
             </h2>
             <p className="text-lg md:text-xl text-primary-foreground/80 mb-8 max-w-xl font-jakarta-custom">
-              At <span className="font-semibold text-accent">CLEARSTEPS</span>, we specialize in providing comprehensive
-              ABA therapy services designed to help individuals with Autism Spectrum Disorder (ASD) unlock their full
-              potential.
+              At <span className="font-semibold text-accent">CLEARSTEPS</span>, we provide structured, purpose-driven ABA therapy that helps children grow with clarity, confidence, and consistency.
+              Our work is grounded in evidence, guided by compassion, and designed to support families every step of the way.
             </p>
 
             {/* Info Cards Row */}
@@ -44,20 +43,6 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* Image Placeholder */}
-          <div className="relative hidden lg:block">
-            <div className="relative w-full aspect-square max-w-lg mx-auto">
-              <div className="absolute inset-0 bg-gradient-to-br from-accent/30 to-secondary/30 rounded-3xl backdrop-blur-sm border border-primary-foreground/10" />
-              <div className="absolute inset-4 bg-primary-foreground/5 rounded-2xl flex items-center justify-center">
-                <div className="text-center p-8">
-                  <div className="w-24 h-24 mx-auto mb-4 bg-accent/20 rounded-full flex items-center justify-center">
-                    <span className="text-4xl">👦</span>
-                  </div>
-                  <p className="text-primary-foreground/80 text-lg">Joyful children thriving with ABA therapy</p>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
 
