@@ -110,9 +110,21 @@
     background: hsl(var(--blue-section));
   }
 
+  /* Contact form: enforce requested label + placeholder styling */
+  #contact label {
+    font-weight: 700;
+  }
+  #contact label::after {
+    content: none !important;
+  }
+
   .input-field {
     @apply w-full bg-transparent border-b border-primary-foreground/30 py-3 text-primary-foreground placeholder:text-primary-foreground/30 focus:outline-none focus:border-primary-foreground transition-colors;
   }
+  .input-field::placeholder {
+    opacity: 0.4;
+  }
+
 }
 
 @layer utilities {
