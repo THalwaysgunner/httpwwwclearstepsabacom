@@ -1572,7 +1572,7 @@
                             <p role="status" aria-live="polite" aria-atomic="true"></p>
                             <ul></ul>
                         </div>
-                        <form action="#" method="post" class="wpcf7-form init" aria-label="Contact form"
+                        <form id="contact-form" action="#" method="post" class="wpcf7-form init" aria-label="Contact form"
                             novalidate="novalidate" data-status="init">
                             <div class="get-started">
                                 <div class="get-started__items">
@@ -1583,11 +1583,11 @@
                                             <label>
                                                 Your Name:<br />
                                                 <span class="wpcf7-form-control-wrap" data-name="your-name"><input
-                                                        size="40" maxlength="400"
+                                                        id="contact-name" size="40" maxlength="400"
                                                         class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required"
                                                         autocomplete="name" aria-required="true" aria-invalid="false"
                                                         placeholder="Ex. John Dow" value="" type="text"
-                                                        name="your-name" /></span>
+                                                        name="your-name" required /></span>
                                             </label>
                                         </p>
                                     </div>
@@ -1598,11 +1598,11 @@
                                             <label>
                                                 Your Phone:<br />
                                                 <span class="wpcf7-form-control-wrap" data-name="tel-537"><input
-                                                        size="40" maxlength="400"
+                                                        id="contact-phone" size="40" maxlength="400"
                                                         class="wpcf7-form-control wpcf7-tel wpcf7-validates-as-required wpcf7-text wpcf7-validates-as-tel input"
                                                         aria-required="true" aria-invalid="false"
                                                         placeholder="Ex. +7 357 986 45 21" value="" type="tel"
-                                                        name="tel-537" /></span>
+                                                        name="tel-537" required /></span>
                                             </label>
                                         </p>
                                     </div>
@@ -1613,11 +1613,11 @@
                                             <label>
                                                 Your Email:<br />
                                                 <span class="wpcf7-form-control-wrap" data-name="email-91"><input
-                                                        size="40" maxlength="400"
+                                                        id="contact-email" size="40" maxlength="400"
                                                         class="wpcf7-form-control wpcf7-email wpcf7-validates-as-required wpcf7-text wpcf7-validates-as-email"
                                                         autocomplete="email" aria-required="true" aria-invalid="false"
                                                         placeholder="Ex. mail@gmail.com" value="" type="email"
-                                                        name="email-91" /></span>
+                                                        name="email-91" required /></span>
                                             </label>
                                         </p>
                                     </div>
@@ -1627,23 +1627,48 @@
                                             <img src="https://connectaba.org/wp-content/themes/connectaba/assets/img/icon-diagonal-arrow.svg"
                                                 alt="Submit button form icon" />
                                         </p>
-                                        <div class="button">
+                                        <button type="submit" class="button" style="cursor: pointer; border: none; background: transparent; width: 100%; text-align: left;">
                                             <div class="button-text-1">
                                                 <p>Get Started</p>
                                             </div>
                                             <div class="button-text-2">
                                                 <p>Reach out today!</p>
                                             </div>
-                                        </div>
-                                        <p>
-                                            <input class="wpcf7-form-control wpcf7-submit has-spinner hide-button"
-                                                type="submit" value="Get Started" />
-                                        </p>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
                             <div class="wpcf7-response-output" aria-hidden="true"></div>
                         </form>
+                        <script>
+                            document.getElementById('contact-form').addEventListener('submit', function(e) {
+                                e.preventDefault();
+                                
+                                const name = document.getElementById('contact-name').value.trim();
+                                const phone = document.getElementById('contact-phone').value.trim();
+                                const email = document.getElementById('contact-email').value.trim();
+                                
+                                if (!name || !phone || !email) {
+                                    alert('Please fill in all fields');
+                                    return;
+                                }
+                                
+                                const subject = encodeURIComponent('New Contact Request from CLEARSTEPS Website');
+                                const body = encodeURIComponent(
+                                    'New contact form submission:\n\n' +
+                                    'Name: ' + name + '\n' +
+                                    'Phone: ' + phone + '\n' +
+                                    'Email: ' + email + '\n\n' +
+                                    'Please contact this person as soon as possible.'
+                                );
+                                
+                                window.location.href = 'mailto:hello@clearstepsaba.com?subject=' + subject + '&body=' + body;
+                                
+                                // Clear form
+                                document.getElementById('contact-form').reset();
+                                alert('Thank you! Your email client will open to send the message.');
+                            });
+                        </script>
                     </div>
                 </div>
             </section>
