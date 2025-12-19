@@ -36,7 +36,7 @@ const ContactForm = () => {
             <div className="bg-primary-foreground/5 backdrop-blur-sm rounded-2xl p-4 border border-primary-foreground/10">
               <div className="flex items-center gap-3 mb-2">
                 <User className="w-5 h-5 text-accent" />
-                <label className="text-sm text-primary-foreground/70 font-bold">Your Name</label>
+                <label className="text-sm text-primary-foreground/70 font-bold !font-bold !after:content-none">Your Name</label>
               </div>
               <input
                 type="text"
@@ -52,7 +52,7 @@ const ContactForm = () => {
             <div className="bg-primary-foreground/5 backdrop-blur-sm rounded-2xl p-4 border border-primary-foreground/10">
               <div className="flex items-center gap-3 mb-2">
                 <Phone className="w-5 h-5 text-accent" />
-                <label className="text-sm text-primary-foreground/70 font-bold">Your Phone</label>
+                <label className="text-sm text-primary-foreground/70 font-bold !font-bold !after:content-none">Your Phone</label>
               </div>
               <input
                 type="tel"
@@ -68,7 +68,7 @@ const ContactForm = () => {
             <div className="bg-primary-foreground/5 backdrop-blur-sm rounded-2xl p-4 border border-primary-foreground/10">
               <div className="flex items-center gap-3 mb-2">
                 <Mail className="w-5 h-5 text-accent" />
-                <label className="text-sm text-primary-foreground/70 font-bold">Your Email</label>
+                <label className="text-sm text-primary-foreground/70 font-bold !font-bold !after:content-none">Your Email</label>
               </div>
               <input
                 type="email"
