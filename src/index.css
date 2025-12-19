@@ -111,7 +111,7 @@
   }
 
   .input-field {
-    @apply w-full bg-transparent border-b border-primary-foreground/30 py-3 text-primary-foreground placeholder:text-primary-foreground/50 focus:outline-none focus:border-primary-foreground transition-colors;
+    @apply w-full bg-transparent border-b border-primary-foreground/30 py-3 text-primary-foreground placeholder:text-primary-foreground/30 focus:outline-none focus:border-primary-foreground transition-colors;
   }
 }
 
