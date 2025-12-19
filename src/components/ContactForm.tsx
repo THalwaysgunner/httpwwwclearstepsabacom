@@ -36,14 +36,14 @@ const ContactForm = () => {
             <div className="bg-primary-foreground/5 backdrop-blur-sm rounded-2xl p-4 border border-primary-foreground/10">
               <div className="flex items-center gap-3 mb-2">
                 <User className="w-5 h-5 text-accent" />
-                <label className="text-sm text-primary-foreground/70">Your Name:</label>
+                <label className="text-sm text-primary-foreground/70 font-bold">Your Name</label>
               </div>
               <input
                 type="text"
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                 placeholder="Ex. John Doe"
-                className="input-field"
+                className="input-field placeholder:opacity-40"
                 required
               />
             </div>
@@ -52,14 +52,14 @@ const ContactForm = () => {
             <div className="bg-primary-foreground/5 backdrop-blur-sm rounded-2xl p-4 border border-primary-foreground/10">
               <div className="flex items-center gap-3 mb-2">
                 <Phone className="w-5 h-5 text-accent" />
-                <label className="text-sm text-primary-foreground/70">Your Phone:</label>
+                <label className="text-sm text-primary-foreground/70 font-bold">Your Phone</label>
               </div>
               <input
                 type="tel"
                 value={formData.phone}
                 onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                 placeholder="Ex. +1 718 344 1446"
-                className="input-field"
+                className="input-field placeholder:opacity-40"
                 required
               />
             </div>
@@ -68,14 +68,14 @@ const ContactForm = () => {
             <div className="bg-primary-foreground/5 backdrop-blur-sm rounded-2xl p-4 border border-primary-foreground/10">
               <div className="flex items-center gap-3 mb-2">
                 <Mail className="w-5 h-5 text-accent" />
-                <label className="text-sm text-primary-foreground/70">Your Email:</label>
+                <label className="text-sm text-primary-foreground/70 font-bold">Your Email</label>
               </div>
               <input
                 type="email"
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 placeholder="Ex. mail@gmail.com"
-                className="input-field"
+                className="input-field placeholder:opacity-40"
                 required
               />
             </div>
