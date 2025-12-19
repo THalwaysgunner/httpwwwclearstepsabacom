@@ -43,7 +43,7 @@ const ContactForm = () => {
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                 placeholder="Ex. John Doe"
-                className="input-field placeholder:opacity-40"
+                className="input-field"
                 required
               />
             </div>
@@ -59,7 +59,7 @@ const ContactForm = () => {
                 value={formData.phone}
                 onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                 placeholder="Ex. +1 718 344 1446"
-                className="input-field placeholder:opacity-40"
+                className="input-field"
                 required
               />
             </div>
@@ -75,7 +75,7 @@ const ContactForm = () => {
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 placeholder="Ex. mail@gmail.com"
-                className="input-field placeholder:opacity-40"
+                className="input-field"
                 required
               />
             </div>
