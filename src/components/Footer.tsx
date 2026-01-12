@@ -1,12 +1,16 @@
 import { Phone, Mail } from "lucide-react";
 import logo from "@/assets/clearsteps-logo.png";
 
-const Footer = () => {
-  const quickLinks = [
+interface FooterProps {
+  onOpenContactModal: () => void;
+}
+
+const Footer = ({ onOpenContactModal }: FooterProps) => {
+  const quickLinks: Array<{ name: string; href?: string; action?: "modal" }> = [
     { name: "Home", href: "#home" },
     { name: "Our Services", href: "#services" },
     { name: "Career", href: "#career" },
-    { name: "Contacts", href: "#contact" },
+    { name: "Contacts", action: "modal" },
   ];
 
   return (
@@ -27,13 +31,24 @@ const Footer = () => {
             <h4 className="font-semibold text-lg mb-6">Quick Links</h4>
             <nav className="space-y-3">
               {quickLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  className="block text-primary-foreground/70 hover:text-accent transition-colors"
-                >
-                  {link.name}
-                </a>
+                link.action === "modal" ? (
+                  <button
+                    key={link.name}
+                    type="button"
+                    onClick={onOpenContactModal}
+                    className="block text-primary-foreground/70 hover:text-accent transition-colors text-left"
+                  >
+                    {link.name}
+                  </button>
+                ) : (
+                  <a
+                    key={link.name}
+                    href={link.href}
+                    className="block text-primary-foreground/70 hover:text-accent transition-colors"
+                  >
+                    {link.name}
+                  </a>
+                )
               ))}
             </nav>
           </div>

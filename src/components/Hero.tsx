@@ -1,11 +1,10 @@
 import { ArrowUpRight } from "lucide-react";
 
-const Hero = () => {
-  const scrollToId = (id: string) => {
-    const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-  };
+interface HeroProps {
+  onOpenContactModal: () => void;
+}
 
+const Hero = ({ onOpenContactModal }: HeroProps) => {
   return (
     <section id="home" className="relative min-h-screen flex items-center gradient-bg overflow-hidden pt-20">
       {/* Background Pattern */}
@@ -38,7 +37,7 @@ const Hero = () => {
               {/* CTA Button */}
               <button
                 type="button"
-                onClick={() => scrollToId("contact")}
+                onClick={onOpenContactModal}
                 className="btn-get-started group"
               >
                 <div>

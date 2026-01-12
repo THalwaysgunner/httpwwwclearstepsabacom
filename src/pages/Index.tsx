@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import OnlyText from "@/components/OnlyText";
@@ -8,22 +9,26 @@ import HowItWorks from "@/components/HowItWorks";
 import Testimonials from "@/components/Testimonials";
 import ContactForm from "@/components/ContactForm";
 import Footer from "@/components/Footer";
+import ContactModal from "@/components/ContactModal";
 
 const Index = () => {
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+
   return (
     <div className="min-h-screen">
-      <Header />
+      <Header onOpenContactModal={() => setIsContactModalOpen(true)} />
       <main>
-        <Hero />
+        <Hero onOpenContactModal={() => setIsContactModalOpen(true)} />
         <OnlyText />
         <Services />
         <WhyChoose />
-        <CTASection />
+        <CTASection onOpenContactModal={() => setIsContactModalOpen(true)} />
         <HowItWorks />
         <Testimonials />
-        <ContactForm />
+        <ContactForm onOpenContactModal={() => setIsContactModalOpen(true)} />
       </main>
-      <Footer />
+      <Footer onOpenContactModal={() => setIsContactModalOpen(true)} />
+      <ContactModal open={isContactModalOpen} onOpenChange={setIsContactModalOpen} />
     </div>
   );
 };
