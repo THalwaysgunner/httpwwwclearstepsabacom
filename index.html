@@ -893,10 +893,12 @@
                         </div>
                         <div class="hero__description">
                             <p>
-                                At <span class="gradient-1">CLEARSTEPS</span>, we provide structured,</br> purpose-driven ABA
+                                At <span class="gradient-1">CLEARSTEPS</span>, we provide structured,</br>
+                                purpose-driven ABA
                                 therapy that
                                 helps children</br> grow with clarity, confidence, and consistency.<br />
-                                Our work is grounded in evidence, guided by compassion, and designed to support families</br>
+                                Our work is grounded in evidence, guided by compassion, and designed to support
+                                families</br>
                                 every step of
                                 the way.
                             </p>
@@ -1578,8 +1580,8 @@
                             <p role="status" aria-live="polite" aria-atomic="true"></p>
                             <ul></ul>
                         </div>
-                        <form id="contact-form" action="#" method="post" class="wpcf7-form init" aria-label="Contact form"
-                            novalidate="novalidate" data-status="init">
+                        <form id="contact-form" action="#" method="post" class="wpcf7-form init"
+                            aria-label="Contact form" novalidate="novalidate" data-status="init">
                             <div class="get-started">
                                 <div class="get-started__items">
                                     <div class="get-started__item get-started__item--name">
@@ -1592,8 +1594,8 @@
                                                         id="contact-name" size="40" maxlength="400"
                                                         class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required"
                                                         autocomplete="name" aria-required="true" aria-invalid="false"
-                                                        placeholder="Ex. John Doe" value="" type="text"
-                                                        name="your-name" required /></span>
+                                                        placeholder="Ex. John Doe" value="" type="text" name="your-name"
+                                                        required /></span>
                                             </label>
                                         </p>
                                     </div>
@@ -1633,7 +1635,8 @@
                                             <img src="https://connectaba.org/wp-content/themes/connectaba/assets/img/icon-diagonal-arrow.svg"
                                                 alt="Submit button form icon" />
                                         </p>
-                                        <button type="submit" class="button" style="cursor: pointer; border: none; background: transparent; width: 100%; text-align: left;">
+                                        <button type="submit" class="button"
+                                            style="cursor: pointer; border: none; background: transparent; width: 100%; text-align: left;">
                                             <div class="button-text-1">
                                                 <p>Get Started</p>
                                             </div>
@@ -1644,37 +1647,17 @@
                                     </div>
                                 </div>
                             </div>
+                            <!-- Thank you message (hidden by default) -->
+                            <div id="contact-form-success"
+                                style="display: none; text-align: center; padding: 40px 20px;">
+                                <h2 style="color: white; font-size: 28px; margin-bottom: 16px;">Thank you!</h2>
+                                <p style="color: rgba(255,255,255,0.8); font-size: 16px; margin-bottom: 24px;">We will
+                                    get back to you soon.</p>
+                                <button type="button" onclick="resetContactForm()"
+                                    style="background: white; color: #1a365d; border: none; padding: 12px 32px; border-radius: 8px; font-size: 16px; cursor: pointer; font-weight: 600;">Close</button>
+                            </div>
                             <div class="wpcf7-response-output" aria-hidden="true"></div>
                         </form>
-                        <script>
-                            document.getElementById('contact-form').addEventListener('submit', function(e) {
-                                e.preventDefault();
-                                
-                                const name = document.getElementById('contact-name').value.trim();
-                                const phone = document.getElementById('contact-phone').value.trim();
-                                const email = document.getElementById('contact-email').value.trim();
-                                
-                                if (!name || !phone || !email) {
-                                    alert('Please fill in all fields');
-                                    return;
-                                }
-                                
-                                const subject = encodeURIComponent('New Contact Request from CLEARSTEPS Website');
-                                const body = encodeURIComponent(
-                                    'New contact form submission:\n\n' +
-                                    'Name: ' + name + '\n' +
-                                    'Phone: ' + phone + '\n' +
-                                    'Email: ' + email + '\n\n' +
-                                    'Please contact this person as soon as possible.'
-                                );
-                                
-                                window.location.href = 'mailto:hello@clearstepsaba.com?subject=' + subject + '&body=' + body;
-                                
-                                // Clear form
-                                document.getElementById('contact-form').reset();
-                                alert('Thank you! Your email client will open to send the message.');
-                            });
-                        </script>
                     </div>
                 </div>
             </section>
@@ -1688,7 +1671,8 @@
                             <img src="/logo.png" class="footer-logo" alt="CLEARSTEPS logo"
                                 style="height: 70px; width: auto; filter: brightness(0) invert(1);" />
                             <p>
-                                We provide comprehensive ABA therapy focused on helping individuals build meaningful skills and make real, lasting progress.
+                                We provide comprehensive ABA therapy focused on helping individuals build meaningful
+                                skills and make real, lasting progress.
                             </p>
                         </div>
                         <div class="col col-2">
@@ -1764,7 +1748,7 @@
                             <p role="status" aria-live="polite" aria-atomic="true"></p>
                             <ul></ul>
                         </div>
-                        <form action="#" method="post" class="wpcf7-form init" aria-label="Contact form"
+                        <form id="popup-form" action="#" method="post" class="wpcf7-form init" aria-label="Contact form"
                             novalidate="novalidate" data-status="init">
                             <div class="get-started">
                                 <div class="get-started__items">
@@ -1834,6 +1818,14 @@
                                     </div>
                                 </div>
                             </div>
+                            <!-- Thank you message for popup (hidden by default) -->
+                            <div id="popup-form-success" style="display: none; text-align: center; padding: 40px 20px;">
+                                <h2 style="color: white; font-size: 28px; margin-bottom: 16px;">Thank you!</h2>
+                                <p style="color: rgba(255,255,255,0.8); font-size: 16px; margin-bottom: 24px;">We will
+                                    get back to you soon.</p>
+                                <button type="button" onclick="closePopup()"
+                                    style="background: white; color: #1a365d; border: none; padding: 12px 32px; border-radius: 8px; font-size: 16px; cursor: pointer; font-weight: 600;">Close</button>
+                            </div>
                             <div class="wpcf7-response-output" aria-hidden="true"></div>
                         </form>
                     </div>
@@ -1846,6 +1838,112 @@
         id="connectaba-navigation-js"></script>
     <script src="https://connectaba.org/wp-content/themes/connectaba/assets/js/app.js?ver=1.0.0"
         id="connectaba-main-js"></script>
+
+    <!-- Supabase SDK for Edge Functions -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        // Initialize Supabase client
+        const SUPABASE_URL = 'https://apwstfgtutbccviqncsi.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFwd3N0Zmd0dXRiY2N2aXFuY3NpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzY2OTYxMzUsImV4cCI6MjA1MjI3MjEzNX0.placeholder';
+        const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        // Send contact email via Edge Function
+        async function sendContactEmail(name, phone, email) {
+            try {
+                const { data, error } = await supabaseClient.functions.invoke('send-contact-email', {
+                    body: { name, phone, email }
+                });
+                if (error) throw error;
+                return { success: true };
+            } catch (error) {
+                console.error('Error sending email:', error);
+                return { success: false, error: error.message };
+            }
+        }
+
+        // Footer Contact Form Handler
+        document.getElementById('contact-form').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const name = document.getElementById('contact-name').value.trim();
+            const phone = document.getElementById('contact-phone').value.trim();
+            const email = document.getElementById('contact-email').value.trim();
+
+            if (!name || !phone || !email) {
+                alert('Please fill in all fields');
+                return;
+            }
+
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<div class="button-text-1"><p>Sending...</p></div>';
+            submitBtn.disabled = true;
+
+            const result = await sendContactEmail(name, phone, email);
+
+            if (result.success) {
+                // Hide form, show thank you
+                document.querySelector('#contact-form .get-started').style.display = 'none';
+                document.getElementById('contact-form-success').style.display = 'block';
+                this.reset();
+            } else {
+                alert('Failed to send message. Please try again.');
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }
+        });
+
+        // Reset footer contact form
+        function resetContactForm() {
+            document.querySelector('#contact-form .get-started').style.display = 'grid';
+            document.getElementById('contact-form-success').style.display = 'none';
+        }
+
+        // Popup Form Handler
+        document.getElementById('popup-form').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const form = this;
+            const name = form.querySelector('input[name="your-name"]').value.trim();
+            const phone = form.querySelector('input[name="tel-537"]').value.trim();
+            const email = form.querySelector('input[name="email-91"]').value.trim();
+
+            if (!name || !phone || !email) {
+                alert('Please fill in all fields');
+                return;
+            }
+
+            const submitBtn = form.querySelector('input[type="submit"]');
+            submitBtn.value = 'Sending...';
+            submitBtn.disabled = true;
+
+            const result = await sendContactEmail(name, phone, email);
+
+            if (result.success) {
+                // Hide form, show thank you
+                document.querySelector('#popup-form .get-started').style.display = 'none';
+                document.getElementById('popup-form-success').style.display = 'block';
+                form.reset();
+            } else {
+                alert('Failed to send message. Please try again.');
+                submitBtn.value = 'Get Started';
+                submitBtn.disabled = false;
+            }
+        });
+
+        // Close popup and reset
+        function closePopup() {
+            document.querySelector('#popup-form .get-started').style.display = 'grid';
+            document.getElementById('popup-form-success').style.display = 'none';
+            // Close the popup
+            const popup = document.getElementById('popup');
+            if (popup) {
+                popup.classList.remove('popup--active');
+                popup.setAttribute('aria-hidden', 'true');
+                document.body.classList.remove('popup-open');
+            }
+        }
+    </script>
 </body>
 
 </html>
