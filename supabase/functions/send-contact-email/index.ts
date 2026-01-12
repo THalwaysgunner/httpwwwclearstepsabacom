@@ -1,5 +1,6 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { Resend } from "https://esm.sh/resend@2.0.0";
+import { z } from "https://esm.sh/zod@3.25.76";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -7,11 +8,13 @@ const corsHeaders = {
     "authorization, x-client-info, apikey, content-type",
 };
 
-interface ContactEmailRequest {
-  name: string;
-  phone: string;
-  email: string;
-}
+const ContactEmailSchema = z.object({
+  name: z.string().trim().min(1).max(100),
+  phone: z.string().trim().min(1).max(50),
+  email: z.string().trim().email().max(255),
+});
+
+type ContactEmailRequest = z.infer<typeof ContactEmailSchema>;
 
 const handler = async (req: Request): Promise<Response> => {
   // Handle CORS preflight requests
@@ -20,9 +23,18 @@ const handler = async (req: Request): Promise<Response> => {
   }
 
   try {
-    const { name, phone, email }: ContactEmailRequest = await req.json();
+    const parsed = ContactEmailSchema.safeParse(await req.json());
+    if (!parsed.success) {
+      return new Response(
+        JSON.stringify({ error: "Invalid form data" }),
+        {
+          status: 400,
+          headers: { "Content-Type": "application/json", ...corsHeaders },
+        }
+      );
+    }
 
-    console.log("Received contact form submission:", { name, phone, email });
+    const { name, phone, email }: ContactEmailRequest = parsed.data;
 
     const resend = new Resend(Deno.env.get("RESEND_API_KEY"));
 

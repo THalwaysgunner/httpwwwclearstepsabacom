@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { User, Phone, Mail, ArrowUpRight, CheckCircle } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import {
@@ -29,13 +29,9 @@ const ContactModal = ({ open, onOpenChange }: ContactModalProps) => {
     setIsSubmitting(true);
 
     try {
-      console.log("ContactModal submit()", formData);
-
-      const { data, error } = await supabase.functions.invoke("send-contact-email", {
+      const { error } = await supabase.functions.invoke("send-contact-email", {
         body: formData,
       });
-
-      console.log("send-contact-email response", { data, error });
 
       if (error) throw error;
 
@@ -49,18 +45,22 @@ const ContactModal = ({ open, onOpenChange }: ContactModalProps) => {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     void submit();
   };
 
+  const handleOpenChange = (nextOpen: boolean) => {
+    if (!nextOpen) setIsSuccess(false);
+    onOpenChange(nextOpen);
+  };
+
   const handleClose = () => {
-    setIsSuccess(false);
-    onOpenChange(false);
+    handleOpenChange(false);
   };
 
   return (
-    <Dialog open={open} onOpenChange={handleClose}>
+    <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogContent className="sm:max-w-lg bg-primary text-primary-foreground border-primary-foreground/20">
         {isSuccess ? (
           <div className="flex flex-col items-center justify-center py-8 text-center">
