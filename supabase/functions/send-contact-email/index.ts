@@ -28,7 +28,7 @@ const handler = async (req: Request): Promise<Response> => {
 
     // Send notification email to the business
     const { data: notificationData, error: notificationError } = await resend.emails.send({
-      from: "ClearSteps <notifications@clearstepsaba.com>",
+      from: "ClearSteps <notifications@notifications.clearstepsaba.com>",
       to: ["hello@clearstepsaba.com"],
       subject: `New Contact Form Submission from ${name}`,
       html: `
@@ -50,7 +50,7 @@ const handler = async (req: Request): Promise<Response> => {
 
     // Send confirmation email to the user
     const { data: confirmationData, error: confirmationError } = await resend.emails.send({
-      from: "ClearSteps <notifications@clearstepsaba.com>",
+      from: "ClearSteps <notifications@notifications.clearstepsaba.com>",
       to: [email],
       subject: "Thank you for contacting ClearSteps!",
       html: `
