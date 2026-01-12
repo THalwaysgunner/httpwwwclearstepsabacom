@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { User, Phone, Mail, ArrowUpRight, CheckCircle } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
@@ -19,29 +19,40 @@ const ContactModal = ({ open, onOpenChange }: ContactModalProps) => {
   const [isSuccess, setIsSuccess] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  useEffect(() => {
-    if (open) {
+  const handleOpenChange = (nextOpen: boolean) => {
+    if (!nextOpen) {
+      // Only reset when closing
       setIsSuccess(false);
       setErrorMessage(null);
+      setFormData({ name: "", phone: "", email: "" });
     }
-  }, [open]);
+    onOpenChange(nextOpen);
+  };
 
-  const submit = async () => {
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
     if (isSubmitting) return;
 
     setIsSubmitting(true);
     setErrorMessage(null);
 
     try {
+      console.log("Submitting form...", formData);
+      
       const { data, error } = await supabase.functions.invoke("send-contact-email", {
         body: formData,
       });
 
-      if (error) throw error;
+      console.log("Response:", { data, error });
 
-      console.log("send-contact-email success", data);
+      if (error) {
+        throw error;
+      }
+
+      console.log("Setting isSuccess to true");
       setIsSuccess(true);
-      setFormData({ name: "", phone: "", email: "" });
     } catch (error: any) {
       console.error("Error sending contact form:", error);
       setErrorMessage(error?.message || "Failed to send your message. Please try again.");
@@ -50,25 +61,8 @@ const ContactModal = ({ open, onOpenChange }: ContactModalProps) => {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    void submit();
-  };
-
-  const closeModal = () => {
-    setIsSuccess(false);
-    setErrorMessage(null);
-    onOpenChange(false);
-  };
-
   return (
-    <Dialog
-      open={open}
-      onOpenChange={(nextOpen) => {
-        if (!nextOpen) closeModal();
-        else onOpenChange(true);
-      }}
-    >
+    <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogContent className="sm:max-w-lg bg-primary text-primary-foreground border-primary-foreground/20">
         {isSuccess ? (
           <div className="flex flex-col items-center justify-center py-8 text-center">
@@ -77,7 +71,7 @@ const ContactModal = ({ open, onOpenChange }: ContactModalProps) => {
             <p className="text-primary-foreground/80 mb-6">We will get back to you soon.</p>
             <Button
               type="button"
-              onClick={closeModal}
+              onClick={() => handleOpenChange(false)}
               className="bg-accent text-accent-foreground hover:bg-accent/90"
             >
               Close
@@ -92,16 +86,7 @@ const ContactModal = ({ open, onOpenChange }: ContactModalProps) => {
               </p>
             </DialogHeader>
 
-            <form
-              onSubmit={handleSubmit}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  e.preventDefault();
-                  void submit();
-                }
-              }}
-              className="space-y-4 mt-4"
-            >
+            <form onSubmit={handleSubmit} className="space-y-4 mt-4">
               {errorMessage && (
                 <div className="rounded-lg border border-destructive/40 bg-destructive/10 p-3 text-sm text-primary-foreground">
                   {errorMessage}
