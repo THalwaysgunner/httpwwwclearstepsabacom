@@ -1,7 +1,12 @@
 import { useState } from "react";
 import { User, Phone, Mail, ArrowUpRight, CheckCircle } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 
 interface ContactModalProps {
@@ -17,61 +22,55 @@ const ContactModal = ({ open, onOpenChange }: ContactModalProps) => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  const handleOpenChange = (nextOpen: boolean) => {
-    if (!nextOpen) {
-      // Only reset when closing
-      setIsSuccess(false);
-      setErrorMessage(null);
-      setFormData({ name: "", phone: "", email: "" });
-    }
-    onOpenChange(nextOpen);
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    
+  const submit = async () => {
     if (isSubmitting) return;
 
     setIsSubmitting(true);
-    setErrorMessage(null);
 
     try {
-      console.log("Submitting form...", formData);
-      
+      console.log("ContactModal submit()", formData);
+
       const { data, error } = await supabase.functions.invoke("send-contact-email", {
         body: formData,
       });
 
-      console.log("Response:", { data, error });
+      console.log("send-contact-email response", { data, error });
 
-      if (error) {
-        throw error;
-      }
+      if (error) throw error;
 
-      console.log("Setting isSuccess to true");
       setIsSuccess(true);
+      setFormData({ name: "", phone: "", email: "" });
     } catch (error: any) {
       console.error("Error sending contact form:", error);
-      setErrorMessage(error?.message || "Failed to send your message. Please try again.");
+      alert(error?.message || "Failed to send your message. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
   };
 
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    void submit();
+  };
+
+  const handleClose = () => {
+    setIsSuccess(false);
+    onOpenChange(false);
+  };
+
   return (
-    <Dialog open={open} onOpenChange={handleOpenChange}>
+    <Dialog open={open} onOpenChange={handleClose}>
       <DialogContent className="sm:max-w-lg bg-primary text-primary-foreground border-primary-foreground/20">
         {isSuccess ? (
           <div className="flex flex-col items-center justify-center py-8 text-center">
             <CheckCircle className="w-16 h-16 text-accent mb-4" />
             <h2 className="text-2xl font-bold mb-2">Thank You!</h2>
-            <p className="text-primary-foreground/80 mb-6">We will get back to you soon.</p>
+            <p className="text-primary-foreground/80 mb-6">
+              We will get back to you soon.
+            </p>
             <Button
-              type="button"
-              onClick={() => handleOpenChange(false)}
+              onClick={handleClose}
               className="bg-accent text-accent-foreground hover:bg-accent/90"
             >
               Close
@@ -80,19 +79,24 @@ const ContactModal = ({ open, onOpenChange }: ContactModalProps) => {
         ) : (
           <>
             <DialogHeader>
-              <DialogTitle className="text-xl font-bold text-primary-foreground">Get Started with CLEARSTEPS</DialogTitle>
+              <DialogTitle className="text-xl font-bold text-primary-foreground">
+                Get Started with CLEARSTEPS
+              </DialogTitle>
               <p className="text-primary-foreground/70 text-sm mt-1">
                 Please complete the form, and our administrator will contact you shortly
               </p>
             </DialogHeader>
 
-            <form onSubmit={handleSubmit} className="space-y-4 mt-4">
-              {errorMessage && (
-                <div className="rounded-lg border border-destructive/40 bg-destructive/10 p-3 text-sm text-primary-foreground">
-                  {errorMessage}
-                </div>
-              )}
-
+            <form
+              onSubmit={handleSubmit}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  e.preventDefault();
+                  void submit();
+                }
+              }}
+              className="space-y-4 mt-4"
+            >
               {/* Name */}
               <div className="bg-primary-foreground/5 backdrop-blur-sm rounded-xl p-4 border border-primary-foreground/10">
                 <div className="flex items-center gap-3 mb-2">
@@ -148,8 +152,12 @@ const ContactModal = ({ open, onOpenChange }: ContactModalProps) => {
                 className="w-full bg-accent hover:bg-accent/90 text-accent-foreground rounded-xl p-4 flex items-center justify-between transition-colors group disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <div className="text-left">
-                  <p className="font-semibold">{isSubmitting ? "Sending..." : "Get Started"}</p>
-                  <p className="text-sm opacity-80">{isSubmitting ? "Please wait" : "Reach out today!"}</p>
+                  <p className="font-semibold">
+                    {isSubmitting ? "Sending..." : "Get Started"}
+                  </p>
+                  <p className="text-sm opacity-80">
+                    {isSubmitting ? "Please wait" : "Reach out today!"}
+                  </p>
                 </div>
                 <div className="w-10 h-10 bg-accent-foreground/20 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
                   <ArrowUpRight className="w-5 h-5" />
@@ -164,4 +172,3 @@ const ContactModal = ({ open, onOpenChange }: ContactModalProps) => {
 };
 
 export default ContactModal;
-

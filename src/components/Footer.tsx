@@ -66,17 +66,15 @@ const Footer = ({ onOpenContactModal }: FooterProps) => {
                 </div>
                 <span>+1 (718) 344-1446</span>
               </a>
-              <button
-                type="button"
-                onClick={onOpenContactModal}
+              <a
+                href="mailto:office@clearsteps.com"
                 className="flex items-center gap-3 text-primary-foreground/70 hover:text-accent transition-colors"
-                aria-label="Open contact form"
               >
                 <div className="w-10 h-10 bg-primary/20 rounded-full flex items-center justify-center">
                   <Mail className="w-4 h-4 text-accent" />
                 </div>
                 <span>office@clearsteps.com</span>
-              </button>
+              </a>
             </nav>
           </div>
         </div>
