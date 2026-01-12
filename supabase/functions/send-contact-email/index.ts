@@ -1,4 +1,5 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
+import { Resend } from "https://esm.sh/resend@2.0.0";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -23,59 +24,48 @@ const handler = async (req: Request): Promise<Response> => {
 
     console.log("Received contact form submission:", { name, phone, email });
 
-    const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
+    const resend = new Resend(Deno.env.get("RESEND_API_KEY"));
 
     // Send notification email to the business
-    const notificationResponse = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${RESEND_API_KEY}`,
-      },
-      body: JSON.stringify({
-        from: "ClearSteps <notifications@clearstepsaba.com>",
-        to: ["hello@clearstepsaba.com"],
-        subject: `New Contact Form Submission from ${name}`,
-        html: `
-          <h2>New Contact Form Submission</h2>
-          <p><strong>Name:</strong> ${name}</p>
-          <p><strong>Phone:</strong> ${phone}</p>
-          <p><strong>Email:</strong> ${email}</p>
-          <hr>
-          <p>This message was sent from the ClearSteps website contact form.</p>
-        `,
-      }),
+    const { data: notificationData, error: notificationError } = await resend.emails.send({
+      from: "ClearSteps <onboarding@resend.dev>",
+      to: ["hello@clearstepsaba.com"],
+      subject: `New Contact Form Submission from ${name}`,
+      html: `
+        <h2>New Contact Form Submission</h2>
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Phone:</strong> ${phone}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <hr>
+        <p>This message was sent from the ClearSteps website contact form.</p>
+      `,
     });
 
-    console.log("Notification email response:", notificationResponse.status);
+    if (notificationError) {
+      console.error("Notification email error:", notificationError);
+      throw notificationError;
+    }
+
+    console.log("Notification email sent:", notificationData);
 
     // Send confirmation email to the user
-    const confirmationResponse = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${RESEND_API_KEY}`,
-      },
-      body: JSON.stringify({
-        from: "ClearSteps <notifications@clearstepsaba.com>",
-        to: [email],
-        subject: "Thank you for contacting ClearSteps!",
-        html: `
-          <h1>Thank you for reaching out, ${name}!</h1>
-          <p>We have received your inquiry and our team will contact you shortly at ${phone}.</p>
-          <p>Best regards,<br>The ClearSteps Team</p>
-        `,
-      }),
+    const { data: confirmationData, error: confirmationError } = await resend.emails.send({
+      from: "ClearSteps <onboarding@resend.dev>",
+      to: [email],
+      subject: "Thank you for contacting ClearSteps!",
+      html: `
+        <h1>Thank you for reaching out, ${name}!</h1>
+        <p>We have received your inquiry and our team will contact you shortly at ${phone}.</p>
+        <p>Best regards,<br>The ClearSteps Team</p>
+      `,
     });
 
-    console.log("Confirmation email response:", confirmationResponse.status);
-
-    if (!notificationResponse.ok || !confirmationResponse.ok) {
-      const notifError = await notificationResponse.text();
-      const confError = await confirmationResponse.text();
-      console.error("Email errors:", { notifError, confError });
-      throw new Error("Failed to send emails");
+    if (confirmationError) {
+      console.error("Confirmation email error:", confirmationError);
+      throw confirmationError;
     }
+
+    console.log("Confirmation email sent:", confirmationData);
 
     return new Response(
       JSON.stringify({ success: true, message: "Emails sent successfully" }),
