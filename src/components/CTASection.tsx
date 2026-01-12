@@ -1,6 +1,11 @@
 import { ArrowUpRight } from "lucide-react";
 
 const CTASection = () => {
+  const scrollToId = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
   return (
     <section className="relative py-24 md:py-32 gradient-bg overflow-hidden">
       {/* Background Effects */}
@@ -17,8 +22,9 @@ const CTASection = () => {
             to success.
           </p>
 
-          <a
-            href="#contact"
+          <button
+            type="button"
+            onClick={() => scrollToId("contact")}
             className="inline-flex items-center gap-4 bg-primary-foreground/10 backdrop-blur-sm rounded-full p-3 pl-8 border border-primary-foreground/20 transition-all duration-300 hover:bg-primary-foreground/20 group"
           >
             <div className="text-left">
@@ -28,7 +34,7 @@ const CTASection = () => {
             <div className="w-14 h-14 bg-accent rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
               <ArrowUpRight className="w-6 h-6 text-accent-foreground" />
             </div>
-          </a>
+          </button>
         </div>
       </div>
     </section>

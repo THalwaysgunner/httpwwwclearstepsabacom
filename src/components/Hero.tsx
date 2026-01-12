@@ -1,6 +1,11 @@
 import { ArrowUpRight } from "lucide-react";
 
 const Hero = () => {
+  const scrollToId = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
   return (
     <section id="home" className="relative min-h-screen flex items-center gradient-bg overflow-hidden pt-20">
       {/* Background Pattern */}
@@ -31,7 +36,11 @@ const Hero = () => {
               </div>
 
               {/* CTA Button */}
-              <a href="#contact" className="btn-get-started group">
+              <button
+                type="button"
+                onClick={() => scrollToId("contact")}
+                className="btn-get-started group"
+              >
                 <div>
                   <p className="font-semibold text-primary-foreground">Get Started</p>
                   <p className="text-sm text-primary-foreground/70">Verify Insurance</p>
@@ -39,7 +48,7 @@ const Hero = () => {
                 <div className="w-12 h-12 bg-accent rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
                   <ArrowUpRight className="w-5 h-5 text-accent-foreground" />
                 </div>
-              </a>
+              </button>
             </div>
           </div>
 

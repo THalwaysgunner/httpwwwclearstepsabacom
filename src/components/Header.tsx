@@ -5,11 +5,16 @@ import logo from "@/assets/clearsteps-logo.png";
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  const scrollToId = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
   const navLinks = [
-    { name: "Home", href: "#home" },
-    { name: "Our Services", href: "#services" },
-    { name: "Career", href: "#career" },
-    { name: "Contacts", href: "#contact" },
+    { name: "Home", id: "home" },
+    { name: "Our Services", id: "services" },
+    { name: "Career", id: "career" },
+    { name: "Contacts", id: "contact" },
   ];
 
   return (
@@ -17,36 +22,50 @@ const Header = () => {
       <div className="container mx-auto container-padding">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <a href="#home" className="flex-shrink-0">
+          <button
+            type="button"
+            onClick={() => scrollToId("home")}
+            className="flex-shrink-0"
+            aria-label="Go to top"
+          >
             <img src={logo} alt="CLEARSTEPS Logo" className="h-8 md:h-10 w-auto" />
-          </a>
+          </button>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-8">
+          <nav className="hidden md:flex items-center gap-8" aria-label="Primary">
             {navLinks.map((link) => (
-              <a
+              <button
                 key={link.name}
-                href={link.href}
+                type="button"
+                onClick={() => scrollToId(link.id)}
                 className="text-foreground/80 hover:text-primary transition-colors font-medium font-jakarta-custom"
               >
                 {link.name}
-              </a>
+              </button>
             ))}
           </nav>
 
           {/* Phone & CTA */}
           <div className="hidden md:flex items-center gap-6">
-            <a href="tel:+17183441446" className="flex items-center gap-2 text-foreground/80 hover:text-primary transition-colors">
+            <a
+              href="tel:+17183441446"
+              className="flex items-center gap-2 text-foreground/80 hover:text-primary transition-colors"
+            >
               <Phone className="w-4 h-4" />
               <span>+1 (718) 344-1446</span>
             </a>
-            <a href="#contact" className="btn-primary text-sm">
+            <button
+              type="button"
+              onClick={() => scrollToId("contact")}
+              className="btn-primary text-sm"
+            >
               Get Started
-            </a>
+            </button>
           </div>
 
           {/* Mobile Menu Button */}
           <button
+            type="button"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="md:hidden p-2 text-foreground"
             aria-label="Toggle menu"
@@ -59,24 +78,34 @@ const Header = () => {
       {/* Mobile Menu */}
       {isMenuOpen && (
         <div className="md:hidden absolute top-20 left-0 right-0 bg-background border-b border-border shadow-lg">
-          <nav className="container mx-auto container-padding py-6 flex flex-col gap-4">
+          <nav className="container mx-auto container-padding py-6 flex flex-col gap-4" aria-label="Mobile">
             {navLinks.map((link) => (
-              <a
+              <button
                 key={link.name}
-                href={link.href}
-                onClick={() => setIsMenuOpen(false)}
-                className="text-foreground/80 hover:text-primary transition-colors font-medium py-2"
+                type="button"
+                onClick={() => {
+                  setIsMenuOpen(false);
+                  scrollToId(link.id);
+                }}
+                className="text-left text-foreground/80 hover:text-primary transition-colors font-medium py-2"
               >
                 {link.name}
-              </a>
+              </button>
             ))}
             <a href="tel:+17183441446" className="flex items-center gap-2 text-primary py-2">
               <Phone className="w-4 h-4" />
               <span>+1 (718) 344-1446</span>
             </a>
-            <a href="#contact" className="btn-primary text-center mt-2">
+            <button
+              type="button"
+              onClick={() => {
+                setIsMenuOpen(false);
+                scrollToId("contact");
+              }}
+              className="btn-primary text-center mt-2"
+            >
               Get Started
-            </a>
+            </button>
           </nav>
         </div>
       )}
