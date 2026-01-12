@@ -11,14 +11,19 @@ const ContactForm = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const submit = async () => {
+    if (isSubmitting) return;
+
     setIsSubmitting(true);
 
     try {
+      console.log("ContactForm submit()", formData);
+
       const { data, error } = await supabase.functions.invoke("send-contact-email", {
         body: formData,
       });
+
+      console.log("send-contact-email response", { data, error });
 
       if (error) throw error;
 
@@ -31,12 +36,18 @@ const ContactForm = () => {
       console.error("Error sending contact form:", error);
       toast({
         title: "Error",
-        description: "Failed to send your message. Please try again.",
+        description:
+          error?.message || "Failed to send your message. Please try again.",
         variant: "destructive",
       });
     } finally {
       setIsSubmitting(false);
     }
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    void submit();
   };
 
   return (
@@ -51,7 +62,16 @@ const ContactForm = () => {
           </p>
         </div>
 
-        <form onSubmit={handleSubmit} className="max-w-4xl mx-auto">
+        <form
+          onSubmit={handleSubmit}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              e.preventDefault();
+              void submit();
+            }
+          }}
+          className="max-w-4xl mx-auto"
+        >
           <div className="grid md:grid-cols-4 gap-4">
             {/* Name */}
             <div className="bg-primary-foreground/5 backdrop-blur-sm rounded-2xl p-4 border border-primary-foreground/10">
@@ -103,7 +123,8 @@ const ContactForm = () => {
 
             {/* Submit */}
             <button
-              type="submit"
+              type="button"
+              onClick={() => void submit()}
               disabled={isSubmitting}
               className="bg-primary-foreground/10 backdrop-blur-sm rounded-2xl p-4 border border-primary-foreground/10 flex items-center justify-between hover:bg-primary-foreground/20 transition-colors group disabled:opacity-50 disabled:cursor-not-allowed"
             >
