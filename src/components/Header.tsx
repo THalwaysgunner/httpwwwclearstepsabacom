@@ -2,7 +2,11 @@ import { useState } from "react";
 import { Menu, X, Phone } from "lucide-react";
 import logo from "@/assets/clearsteps-logo.png";
 
-const Header = () => {
+interface HeaderProps {
+  onOpenContactModal: () => void;
+}
+
+const Header = ({ onOpenContactModal }: HeaderProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const scrollToId = (id: string) => {
@@ -10,11 +14,11 @@ const Header = () => {
     if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
-  const navLinks = [
+  const navLinks: Array<{ name: string; id?: string; action?: "modal" }> = [
     { name: "Home", id: "home" },
     { name: "Our Services", id: "services" },
     { name: "Career", id: "career" },
-    { name: "Contacts", id: "contact" },
+    { name: "Contacts", action: "modal" },
   ];
 
   return (
@@ -37,7 +41,13 @@ const Header = () => {
               <button
                 key={link.name}
                 type="button"
-                onClick={() => scrollToId(link.id)}
+                onClick={() => {
+                  if (link.action === "modal") {
+                    onOpenContactModal();
+                  } else {
+                    scrollToId(link.id!);
+                  }
+                }}
                 className="text-foreground/80 hover:text-primary transition-colors font-medium font-jakarta-custom"
               >
                 {link.name}
@@ -56,7 +66,7 @@ const Header = () => {
             </a>
             <button
               type="button"
-              onClick={() => scrollToId("contact")}
+              onClick={onOpenContactModal}
               className="btn-primary text-sm"
             >
               Get Started
@@ -85,7 +95,11 @@ const Header = () => {
                 type="button"
                 onClick={() => {
                   setIsMenuOpen(false);
-                  scrollToId(link.id);
+                  if (link.action === "modal") {
+                    onOpenContactModal();
+                  } else {
+                    scrollToId(link.id!);
+                  }
                 }}
                 className="text-left text-foreground/80 hover:text-primary transition-colors font-medium py-2"
               >
@@ -100,7 +114,7 @@ const Header = () => {
               type="button"
               onClick={() => {
                 setIsMenuOpen(false);
-                scrollToId("contact");
+                onOpenContactModal();
               }}
               className="btn-primary text-center mt-2"
             >

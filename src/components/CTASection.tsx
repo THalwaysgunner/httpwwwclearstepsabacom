@@ -1,11 +1,10 @@
 import { ArrowUpRight } from "lucide-react";
 
-const CTASection = () => {
-  const scrollToId = (id: string) => {
-    const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-  };
+interface CTASectionProps {
+  onOpenContactModal: () => void;
+}
 
+const CTASection = ({ onOpenContactModal }: CTASectionProps) => {
   return (
     <section className="relative py-24 md:py-32 gradient-bg overflow-hidden">
       {/* Background Effects */}
@@ -24,7 +23,7 @@ const CTASection = () => {
 
           <button
             type="button"
-            onClick={() => scrollToId("contact")}
+            onClick={onOpenContactModal}
             className="inline-flex items-center gap-4 bg-primary-foreground/10 backdrop-blur-sm rounded-full p-3 pl-8 border border-primary-foreground/20 transition-all duration-300 hover:bg-primary-foreground/20 group"
           >
             <div className="text-left">
