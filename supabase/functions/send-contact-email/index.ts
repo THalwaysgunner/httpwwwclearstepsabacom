@@ -40,11 +40,11 @@ const handler = async (req: Request): Promise<Response> => {
 
     // Send notification email to the business
     const { data: notificationData, error: notificationError } = await resend.emails.send({
-      from: "ClearSteps <notifications@notifications.clearstepsaba.com>",
+      from: "notifications@notifications.clearstepsaba.com",
       to: ["hello@clearstepsaba.com"],
-      subject: `New Contact Form Submission from ${name}`,
+      subject: `New Contact Request`,
       html: `
-        <h2>New Contact Form Submission</h2>
+        <h2>New Contact Request</h2>
         <p><strong>Name:</strong> ${name}</p>
         <p><strong>Phone:</strong> ${phone}</p>
         <p><strong>Email:</strong> ${email}</p>
@@ -62,22 +62,21 @@ const handler = async (req: Request): Promise<Response> => {
 
     // Send confirmation email to the user
     const { data: confirmationData, error: confirmationError } = await resend.emails.send({
-      from: "ClearSteps <notifications@notifications.clearstepsaba.com>",
+      from: "notifications@notifications.clearstepsaba.com",
       to: [email],
       subject: "Thank you for contacting ClearSteps!",
       html: `
         <h1>Thank you for reaching out, ${name}!</h1>
-        <p>We have received your inquiry and our team will contact you shortly at ${phone}.</p>
+        <p>We have received your inquiry and our team will contact you shortly.</p>
         <p>Best regards,<br>The ClearSteps Team</p>
       `,
     });
 
     if (confirmationError) {
       console.error("Confirmation email error:", confirmationError);
-      throw confirmationError;
+    } else {
+      console.log("Confirmation email sent:", confirmationData);
     }
-
-    console.log("Confirmation email sent:", confirmationData);
 
     return new Response(
       JSON.stringify({ success: true, message: "Emails sent successfully" }),
